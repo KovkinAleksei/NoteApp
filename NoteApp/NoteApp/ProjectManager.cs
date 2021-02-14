@@ -6,12 +6,12 @@ using System.IO;
 
 namespace NoteApp
 {
-    class ProjectManager
+    public class ProjectManager
     {
         /// <summary>
         /// Сохранение записок в файл
         /// </summary>
-        public static void SaveInFile(Project project, string path)
+        public static void SaveInFile(string path, Project project)
         {
             // Создание сериализатора
             JsonSerializer serializer = new JsonSerializer();
@@ -20,7 +20,7 @@ namespace NoteApp
             using (StreamWriter sw = new StreamWriter(path))
             using (JsonWriter write = new JsonTextWriter(sw))
             {
-                // Запись записок в файл
+                // Запись в файл
                 serializer.Serialize(write, project);
             }
         }

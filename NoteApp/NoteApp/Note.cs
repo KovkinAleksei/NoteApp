@@ -7,81 +7,104 @@ namespace NoteApp
     /// <summary>
     /// Заметка
     /// </summary>
-    public class Note : ICloneable
+    public class Note
     {
-        private string name;
-        private NoteCategory category;
-        private string noteText;
-        private DateTime creatingTime;
-        private DateTime lastChangeTime;
+        private string _name;
+        private NoteCategory _category;
+        private string _noteText;
+        private DateTime _creatingTime;
+        private DateTime _modifyingTime;
 
         /// <summary>
-        /// Конструктор заметки, сохраняет время её создания и название "Без названия"
+        /// Сохраняет время создания заметки и название "Без названия"
         /// </summary>
         public Note()
         {
-            creatingTime = DateTime.Now;
-            lastChangeTime = DateTime.Now;
-            name = "Без названия";
+            _creatingTime = DateTime.Now;
+            _modifyingTime = DateTime.Now;
+            _name = "Без названия";
+            _category = NoteCategory.other;
         }
 
         /// <summary>
-        /// Свойство названия заметки
+        /// Возвращает или задаёт название заметки
         /// </summary>
         public string Name
         {
-            // Получить название заметки
+            // Возвращает название заметки
             get
             {
-                return name;
+                return _name;
             }
 
-            // Изменить название заметки
+            // Задаёт название заметки
             set
             {
                 if (value.Length > 50)
-                    throw new ArgumentException ("Название должно быть не длиннее 50 символов");
+                    throw new ArgumentException ("The title can't be longer than 50 symbols");
 
-                name = value;
-                lastChangeTime = DateTime.Now;
+                _name = value;
+                _modifyingTime = DateTime.Now;
             }
         }
 
         /// <summary>
-        /// Свойство категории заметки
+        /// Возвращает или задаёт категорию заметки
         /// </summary>
         public NoteCategory Category
         {
-            // Получить категорию заметки
+            // Возвращает категорию заметки
             get
             {
-                return category;
+                return _category;
             }
 
-            // Изменить категорию заметки
+            // Задаёт категорию заметки
             set
             {
-                category = value;
-                lastChangeTime = DateTime.Now;
+                _category = value;
+                _modifyingTime = DateTime.Now;
             }
         }
 
         /// <summary>
-        /// Свойство текста заметки
+        /// Возвращает или задаёт текст записки
         /// </summary>
         public string NoteText
         {
-            // Получить текст заметки
+            // Возвращает текст записки
             get
             {
-                return noteText;
+                return _noteText;
             }
 
-            // Изменить текст заметки
+            // Задаёт текст записки
             set
             {
-                noteText = value;
-                lastChangeTime = DateTime.Now;
+                _noteText = value;
+                _modifyingTime = DateTime.Now;
+            }
+        }
+
+        /// <summary>
+        /// Возвращает время создания записки
+        /// </summary>
+        public DateTime CreatingTime
+        {
+            get
+            {
+                return _creatingTime;
+            }
+        }
+
+        /// <summary>
+        /// Возвращает время изменения записки
+        /// </summary>
+        public DateTime ModifyingTime
+        {
+            get
+            {
+                return _modifyingTime;
             }
         }
     }

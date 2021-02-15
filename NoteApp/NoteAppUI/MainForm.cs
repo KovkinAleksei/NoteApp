@@ -48,6 +48,16 @@ namespace NoteAppUI
             // Выбор заметки
             if (NotesListBox.Items.Count > _project.NoteIndex)
                 NotesListBox.SelectedIndex = _project.NoteIndex;
+
+            // Добавление подсказок к кнопкам
+            ToolTip removeToolTip = new ToolTip();
+            removeToolTip.SetToolTip(RemoveNoteButton, "Remove note");
+
+            ToolTip editToolTip = new ToolTip();
+            editToolTip.SetToolTip(EditNoteButton, "Edit note");
+
+            ToolTip addToolTip = new ToolTip();
+            addToolTip.SetToolTip(AddNoteButton, "Add note");
         }
 
         /// <summary>
@@ -289,26 +299,7 @@ namespace NoteAppUI
         /// </summary>
         private void RemoveNoteButton_Click(object sender, EventArgs e)
         {
-            // Вывод предупреждения
-            DialogResult deletingResult = MessageBox.Show("Do you really want to delete this note?", "Deleting a note",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-            // Отмена удаления заметки
-            if (deletingResult == DialogResult.No)
-                return;
-
-            // Удаление записки
-            var selectedIndex = NotesListBox.SelectedIndex;
-
-            _project.Notes.RemoveAt(selectedIndex);
-            NotesListBox.Items.Clear();
-
-            // Обновление списка записок
-            for (int k = 0; k < _project.Notes.Count; k++)
-                NotesListBox.Items.Add(_project.Notes[k].Name);
-
-            // Скрыть элементы, описывающие заметку
-            DisableNoteElements();
         }
 
         /// <summary>
@@ -457,6 +448,6 @@ namespace NoteAppUI
         {
             // Сохранение
             Save(_project, CategoryComboBox.SelectedIndex, NotesListBox.SelectedIndex);
-                    }
+        }
     }
 }

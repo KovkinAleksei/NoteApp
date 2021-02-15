@@ -38,11 +38,16 @@ namespace NoteAppUI
             CategoryComboBox.Items.Add("People");
             CategoryComboBox.Items.Add("Work");
 
+            // Добавление сохранённых заметок в список заметок
+            for (int i = 0; i < _project.Notes.Count; i++)
+                NotesListBox.Items.Add(_project.Notes[i].Name);
+
             // Выбор категории заметок
             CategoryComboBox.SelectedIndex = _project.CategoryIndex;
 
             // Выбор заметки
-            NotesListBox.SelectedIndex = _project.NoteIndex;
+            if (NotesListBox.Items.Count > _project.NoteIndex)
+                NotesListBox.SelectedIndex = _project.NoteIndex;
         }
 
         /// <summary>

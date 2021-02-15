@@ -36,14 +36,21 @@ namespace NoteApp
             JsonSerializer serializer = new JsonSerializer();
 
             // Открытие потока для чтения
-            using (StreamReader sr = new StreamReader(path))
-            using (JsonReader read = new JsonTextReader(sr))
+            try
             {
-                // Чтение записок из файла
-                project = (Project)serializer.Deserialize<Project>(read);
-            }
+                using (StreamReader sr = new StreamReader(path))
+                using (JsonReader read = new JsonTextReader(sr))
+                {
+                    // Чтение записок из файла
+                    project = (Project)serializer.Deserialize<Project>(read);
+                }
 
-            return project;
+                return project;
+            }
+            catch (Exception ex)
+            {
+                return new Project();
+            }
         }
     }
 }

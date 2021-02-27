@@ -23,7 +23,7 @@ namespace NoteAppUI
             InitializeComponent();
 
             // Чтение файла
-            _project = ReadFile();
+            _project = ProjectManager.ReadFile(_path);
 
             // Перед выделением заметки скрыть описывающие её элементы
             DisableNoteElements();
@@ -107,35 +107,6 @@ namespace NoteAppUI
                 newNote.Name = editForm.Note.Name;
 
             // Добавление новой заметки в список всех заметок
-            NotesListBox.Items.Add(newNote.Name);
-            _project.Notes.Add(newNote);
-        }
-
-        /// <summary>
-        /// Создаёт новую заметку
-        /// </summary>
-        private void addNoteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            // Проверка количества созданных заметок
-            if (_project.Notes.Count >= 200)
-            {
-                MessageBox.Show("You have reached the limit of 200 created notes", "",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            // Вывод формы создания заметки 
-            EditForm editForm = new EditForm();
-            Note newNote = new Note();
-            editForm.Note = newNote;
-            editForm.ShowDialog();
-
-            // Отмена создания новой заметки
-            if (editForm.DialogResult == DialogResult.Cancel)
-                return;
-
-            // Добавление новой заметки в список всех заметок
-            newNote = editForm.Note;
             NotesListBox.Items.Add(newNote.Name);
             _project.Notes.Add(newNote);
         }
@@ -255,31 +226,8 @@ namespace NoteAppUI
 
             // Вывод формы редактирования заметки
             EditForm editForm = new EditForm();
-            Note selectedNote = _project.Notes[selectedIndex];
-            editForm.Note = selectedNote;
-            editForm.ShowDialog();
-
-            // Отмена изменений заметки
-            if (editForm.DialogResult == DialogResult.Cancel)
-                return;
-
-            // Обновление заметки в главном окне
-            _project.Notes[selectedIndex] = editForm.Note;
-            NotesListBox.Items.RemoveAt(selectedIndex);
-            NotesListBox.Items.Insert(selectedIndex, _project.Notes[selectedIndex].Name);
-            NotesListBox.SetSelected(selectedIndex, true);
-        }
-
-        /// <summary>
-        /// Редактирование заметки
-        /// </summary>
-        private void editNoteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var selectedIndex = NotesListBox.SelectedIndex;
-
-            // Вывод формы редактирования заметки
-            EditForm editForm = new EditForm();
-            Note selectedNote = _project.Notes[selectedIndex];
+            Note selectedNote = new Note();
+            selectedNote = _project.Notes[selectedIndex];
             editForm.Note = selectedNote;
             editForm.ShowDialog();
 
@@ -298,14 +246,6 @@ namespace NoteAppUI
         /// Удаление заметки
         /// </summary>
         private void RemoveNoteButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        /// <summary>
-        /// Удаление заметки
-        /// </summary>
-        private void removeNoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Вывод предупреждения
             DialogResult deletingResult = MessageBox.Show("Do you really want to delete this note?", "Deleting a note",
@@ -411,14 +351,6 @@ namespace NoteAppUI
             project.CategoryIndex = CategoryComboBox.SelectedIndex;
             project.NoteIndex = NotesListBox.SelectedIndex;
             ProjectManager.SaveInFile(_path, project);
-        }
-
-        /// <summary>
-        /// Чтение файла
-        /// </summary>
-        private Project ReadFile()
-        {
-            return ProjectManager.ReadFile(_path);
         }
 
         /// <summary>

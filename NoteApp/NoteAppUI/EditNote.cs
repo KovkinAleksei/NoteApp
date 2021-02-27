@@ -26,12 +26,24 @@ namespace NoteAppUI
             // Создание заметки
             set
             {
-                _note = value;
+                // Копирование заметки
+                _note = new Note();
+                _note.NoteText = value.NoteText;
+                _note.Category = value.Category;
+                _note.CreatingTime = value.CreatingTime;
+                _note.ModifyingTime = value.ModifyingTime;
+                _note.Name = value.Name;
 
                 // Заполнение названия заметки в форме
-                TitleTextBox.Text = _note.Name;
-                EditingTextBox.Text = _note.NoteText;
-                CategoryComboBox.SelectedIndex = (int)_note.Category;
+                TitleTextBox.Text = value.Name;
+                EditingTextBox.Text = value.NoteText;
+
+                // Выставление категории заметки
+                CategoryComboBox.SelectedIndex = (int)value.Category;
+
+                // Выставление даты создания и изменения заметки
+                ModifyingDataPicker.Value = value.ModifyingTime;
+                CreatingDataPicker.Value = value.CreatingTime;
             }
         }
 
@@ -92,6 +104,7 @@ namespace NoteAppUI
         /// </summary>
         private void OKButton_Click(object sender, EventArgs e)
         {
+            _note.ModifyingTime = DateTime.Now;
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
@@ -101,7 +114,6 @@ namespace NoteAppUI
         /// </summary>
         private void CancelButton_Click(object sender, EventArgs e)
         {
-          //  _note = _oldNote;
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }

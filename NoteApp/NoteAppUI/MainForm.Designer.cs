@@ -105,23 +105,23 @@
             // addNoteToolStripMenuItem
             // 
             this.addNoteToolStripMenuItem.Name = "addNoteToolStripMenuItem";
-            this.addNoteToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.addNoteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.addNoteToolStripMenuItem.Text = "Add Note";
-            this.addNoteToolStripMenuItem.Click += new System.EventHandler(this.addNoteToolStripMenuItem_Click);
+            this.addNoteToolStripMenuItem.Click += new System.EventHandler(this.AddNoteButton_Click);
             // 
             // editNoteToolStripMenuItem
             // 
             this.editNoteToolStripMenuItem.Name = "editNoteToolStripMenuItem";
-            this.editNoteToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.editNoteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.editNoteToolStripMenuItem.Text = "Edit Note";
-            this.editNoteToolStripMenuItem.Click += new System.EventHandler(this.editNoteToolStripMenuItem_Click);
+            this.editNoteToolStripMenuItem.Click += new System.EventHandler(this.EditNoteButton_Click);
             // 
             // removeNoteToolStripMenuItem
             // 
             this.removeNoteToolStripMenuItem.Name = "removeNoteToolStripMenuItem";
-            this.removeNoteToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.removeNoteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.removeNoteToolStripMenuItem.Text = "Remove Note";
-            this.removeNoteToolStripMenuItem.Click += new System.EventHandler(this.removeNoteToolStripMenuItem_Click);
+            this.removeNoteToolStripMenuItem.Click += new System.EventHandler(this.RemoveNoteButton_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -233,7 +233,7 @@
             // 
             this.ShowCategoryLabel.AutoSize = true;
             this.ShowCategoryLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ShowCategoryLabel.Location = new System.Drawing.Point(3, 4);
+            this.ShowCategoryLabel.Location = new System.Drawing.Point(3, 11);
             this.ShowCategoryLabel.Name = "ShowCategoryLabel";
             this.ShowCategoryLabel.Size = new System.Drawing.Size(102, 16);
             this.ShowCategoryLabel.TabIndex = 1;
@@ -244,7 +244,7 @@
             this.CategoryComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.CategoryComboBox.FormattingEnabled = true;
-            this.CategoryComboBox.Location = new System.Drawing.Point(111, 3);
+            this.CategoryComboBox.Location = new System.Drawing.Point(111, 10);
             this.CategoryComboBox.Name = "CategoryComboBox";
             this.CategoryComboBox.Size = new System.Drawing.Size(166, 21);
             this.CategoryComboBox.TabIndex = 0;
@@ -287,7 +287,7 @@
             this.NoteTextBox.Name = "NoteTextBox";
             this.NoteTextBox.ReadOnly = true;
             this.NoteTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.NoteTextBox.Size = new System.Drawing.Size(697, 459);
+            this.NoteTextBox.Size = new System.Drawing.Size(697, 464);
             this.NoteTextBox.TabIndex = 8;
             this.NoteTextBox.WordWrap = false;
             this.NoteTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.F1_KeyDown);
@@ -297,7 +297,7 @@
             // 
             this.ModifyingDateTimePicker.Enabled = false;
             this.ModifyingDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.ModifyingDateTimePicker.Location = new System.Drawing.Point(238, 84);
+            this.ModifyingDateTimePicker.Location = new System.Drawing.Point(238, 87);
             this.ModifyingDateTimePicker.Name = "ModifyingDateTimePicker";
             this.ModifyingDateTimePicker.Size = new System.Drawing.Size(92, 20);
             this.ModifyingDateTimePicker.TabIndex = 7;
@@ -306,7 +306,7 @@
             // 
             this.ModifiedTimeLabel.AutoSize = true;
             this.ModifiedTimeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ModifiedTimeLabel.Location = new System.Drawing.Point(169, 88);
+            this.ModifiedTimeLabel.Location = new System.Drawing.Point(169, 91);
             this.ModifiedTimeLabel.Name = "ModifiedTimeLabel";
             this.ModifiedTimeLabel.Size = new System.Drawing.Size(63, 16);
             this.ModifiedTimeLabel.TabIndex = 6;
@@ -316,7 +316,7 @@
             // 
             this.CreatingDateTimePicker.Enabled = false;
             this.CreatingDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.CreatingDateTimePicker.Location = new System.Drawing.Point(71, 84);
+            this.CreatingDateTimePicker.Location = new System.Drawing.Point(71, 87);
             this.CreatingDateTimePicker.Name = "CreatingDateTimePicker";
             this.CreatingDateTimePicker.Size = new System.Drawing.Size(92, 20);
             this.CreatingDateTimePicker.TabIndex = 5;
@@ -325,7 +325,7 @@
             // 
             this.CreatingTimeLabel.AutoSize = true;
             this.CreatingTimeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.CreatingTimeLabel.Location = new System.Drawing.Point(6, 88);
+            this.CreatingTimeLabel.Location = new System.Drawing.Point(9, 91);
             this.CreatingTimeLabel.Name = "CreatingTimeLabel";
             this.CreatingTimeLabel.Size = new System.Drawing.Size(59, 16);
             this.CreatingTimeLabel.TabIndex = 4;

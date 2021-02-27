@@ -87,7 +87,7 @@ namespace NoteApp
         }
 
         /// <summary>
-        /// Возвращает время создания записки
+        /// Возвращает или задаёт время создания записки
         /// </summary>
         public DateTime CreatingTime
         {
@@ -95,16 +95,26 @@ namespace NoteApp
             {
                 return _creatingTime;
             }
+
+            set
+            {
+                _creatingTime = value;
+            }
         }
 
         /// <summary>
-        /// Возвращает время изменения записки
+        /// Возвращает или задаёт время изменения записки
         /// </summary>
         public DateTime ModifyingTime
         {
             get
             {
                 return _modifyingTime;
+            }
+
+            set
+            {
+                _modifyingTime = value;
             }
         }
     }

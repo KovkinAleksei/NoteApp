@@ -41,7 +41,7 @@ namespace NoteApp
             set
             {
                 if (value.Length > 50)
-                    throw new ArgumentException ("The title can't be longer than 50 symbols");
+                    throw new ArgumentException("The title can't be longer than 50 symbols");
 
                 _name = value;
                 _modifyingTime = DateTime.Now;

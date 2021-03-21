@@ -34,7 +34,7 @@ namespace NoteAppUI
         }
 
         /// <summary>
-        /// Переход по ссылке на GutHum автора
+        /// Переход по ссылке на GitHub автора
         /// </summary>
         private void GitHubLinkLabe_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {

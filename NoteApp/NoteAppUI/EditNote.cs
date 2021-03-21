@@ -30,9 +30,9 @@ namespace NoteAppUI
                 _note = new Note();
                 _note.NoteText = value.NoteText;
                 _note.Category = value.Category;
+                _note.Name = value.Name;
                 _note.CreatingTime = value.CreatingTime;
                 _note.ModifyingTime = value.ModifyingTime;
-                _note.Name = value.Name;
 
                 // Заполнение названия заметки в форме
                 TitleTextBox.Text = value.Name;

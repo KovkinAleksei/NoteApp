@@ -74,8 +74,8 @@
             this.MainMenuStrip.Size = new System.Drawing.Size(1002, 24);
             this.MainMenuStrip.TabIndex = 0;
             this.MainMenuStrip.Text = "Menu";
-            this.MainMenuStrip.KeyDown += new System.Windows.Forms.KeyEventHandler(this.F1_KeyDown);
-            this.MainMenuStrip.KeyUp += new System.Windows.Forms.KeyEventHandler(this.F1_KeyUp);
+            this.MainMenuStrip.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Shortcut_KeyDown);
+            this.MainMenuStrip.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Shorcut_KeyUp);
             // 
             // fileToolStripMenuItem
             // 
@@ -105,21 +105,21 @@
             // addNoteToolStripMenuItem
             // 
             this.addNoteToolStripMenuItem.Name = "addNoteToolStripMenuItem";
-            this.addNoteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.addNoteToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.addNoteToolStripMenuItem.Text = "Add Note";
             this.addNoteToolStripMenuItem.Click += new System.EventHandler(this.AddNoteButton_Click);
             // 
             // editNoteToolStripMenuItem
             // 
             this.editNoteToolStripMenuItem.Name = "editNoteToolStripMenuItem";
-            this.editNoteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.editNoteToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.editNoteToolStripMenuItem.Text = "Edit Note";
             this.editNoteToolStripMenuItem.Click += new System.EventHandler(this.EditNoteButton_Click);
             // 
             // removeNoteToolStripMenuItem
             // 
             this.removeNoteToolStripMenuItem.Name = "removeNoteToolStripMenuItem";
-            this.removeNoteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.removeNoteToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.removeNoteToolStripMenuItem.Text = "Remove Note";
             this.removeNoteToolStripMenuItem.Click += new System.EventHandler(this.RemoveNoteButton_Click);
             // 
@@ -169,8 +169,8 @@
             this.splitContainer1.Size = new System.Drawing.Size(1002, 586);
             this.splitContainer1.SplitterDistance = 280;
             this.splitContainer1.TabIndex = 1;
-            this.splitContainer1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.F1_KeyDown);
-            this.splitContainer1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.F1_KeyUp);
+            this.splitContainer1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Shortcut_KeyDown);
+            this.splitContainer1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Shorcut_KeyUp);
             // 
             // NotesListBox
             // 
@@ -185,8 +185,8 @@
             this.NotesListBox.Size = new System.Drawing.Size(271, 484);
             this.NotesListBox.TabIndex = 4;
             this.NotesListBox.SelectedIndexChanged += new System.EventHandler(this.NotesListBox_SelectedIndexChanged);
-            this.NotesListBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.F1_KeyDown);
-            this.NotesListBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.F1_KeyUp);
+            this.NotesListBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Shortcut_KeyDown);
+            this.NotesListBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Shorcut_KeyUp);
             // 
             // RemoveNoteButton
             // 
@@ -198,8 +198,8 @@
             this.RemoveNoteButton.TabIndex = 0;
             this.RemoveNoteButton.UseVisualStyleBackColor = true;
             this.RemoveNoteButton.Click += new System.EventHandler(this.RemoveNoteButton_Click);
-            this.RemoveNoteButton.KeyDown += new System.Windows.Forms.KeyEventHandler(this.F1_KeyDown);
-            this.RemoveNoteButton.KeyUp += new System.Windows.Forms.KeyEventHandler(this.F1_KeyUp);
+            this.RemoveNoteButton.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Shortcut_KeyDown);
+            this.RemoveNoteButton.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Shorcut_KeyUp);
             // 
             // EditNoteButton
             // 
@@ -212,8 +212,8 @@
             this.EditNoteButton.TabIndex = 3;
             this.EditNoteButton.UseVisualStyleBackColor = true;
             this.EditNoteButton.Click += new System.EventHandler(this.EditNoteButton_Click);
-            this.EditNoteButton.KeyDown += new System.Windows.Forms.KeyEventHandler(this.F1_KeyDown);
-            this.EditNoteButton.KeyUp += new System.Windows.Forms.KeyEventHandler(this.F1_KeyUp);
+            this.EditNoteButton.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Shortcut_KeyDown);
+            this.EditNoteButton.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Shorcut_KeyUp);
             // 
             // AddNoteButton
             // 
@@ -226,8 +226,8 @@
             this.AddNoteButton.TabIndex = 2;
             this.AddNoteButton.UseVisualStyleBackColor = true;
             this.AddNoteButton.Click += new System.EventHandler(this.AddNoteButton_Click);
-            this.AddNoteButton.KeyDown += new System.Windows.Forms.KeyEventHandler(this.F1_KeyDown);
-            this.AddNoteButton.KeyUp += new System.Windows.Forms.KeyEventHandler(this.F1_KeyUp);
+            this.AddNoteButton.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Shortcut_KeyDown);
+            this.AddNoteButton.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Shorcut_KeyUp);
             // 
             // ShowCategoryLabel
             // 
@@ -243,15 +243,15 @@
             // 
             this.CategoryComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.CategoryComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CategoryComboBox.FormattingEnabled = true;
             this.CategoryComboBox.Location = new System.Drawing.Point(111, 10);
             this.CategoryComboBox.Name = "CategoryComboBox";
             this.CategoryComboBox.Size = new System.Drawing.Size(166, 21);
             this.CategoryComboBox.TabIndex = 0;
-            this.CategoryComboBox.Text = "All";
             this.CategoryComboBox.SelectedIndexChanged += new System.EventHandler(this.CategoryComboBox_SelectedIndexChanged);
-            this.CategoryComboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.F1_KeyDown);
-            this.CategoryComboBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.F1_KeyUp);
+            this.CategoryComboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Shortcut_KeyDown);
+            this.CategoryComboBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Shorcut_KeyUp);
             // 
             // flowLayoutPanel1
             // 
@@ -290,8 +290,8 @@
             this.NoteTextBox.Size = new System.Drawing.Size(697, 464);
             this.NoteTextBox.TabIndex = 8;
             this.NoteTextBox.WordWrap = false;
-            this.NoteTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.F1_KeyDown);
-            this.NoteTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.F1_KeyUp);
+            this.NoteTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Shortcut_KeyDown);
+            this.NoteTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Shorcut_KeyUp);
             // 
             // ModifyingDateTimePicker
             // 
@@ -335,7 +335,7 @@
             // 
             this.NoteCategoryLabel.AutoSize = true;
             this.NoteCategoryLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.NoteCategoryLabel.Location = new System.Drawing.Point(68, 65);
+            this.NoteCategoryLabel.Location = new System.Drawing.Point(81, 65);
             this.NoteCategoryLabel.Name = "NoteCategoryLabel";
             this.NoteCategoryLabel.Size = new System.Drawing.Size(72, 16);
             this.NoteCategoryLabel.TabIndex = 3;
@@ -345,7 +345,7 @@
             // 
             this.CategoryLabel.AutoSize = true;
             this.CategoryLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.CategoryLabel.Location = new System.Drawing.Point(6, 65);
+            this.CategoryLabel.Location = new System.Drawing.Point(9, 65);
             this.CategoryLabel.Name = "CategoryLabel";
             this.CategoryLabel.Size = new System.Drawing.Size(66, 16);
             this.CategoryLabel.TabIndex = 2;
@@ -373,8 +373,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NoteApp";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.F1_KeyDown);
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.F1_KeyUp);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Shortcut_KeyDown);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Shorcut_KeyUp);
             this.MainMenuStrip.ResumeLayout(false);
             this.MainMenuStrip.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);

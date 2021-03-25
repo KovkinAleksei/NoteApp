@@ -36,7 +36,7 @@ namespace NoteAppUI
 
                 // Заполнение названия заметки в форме
                 TitleTextBox.Text = value.Name;
-                EditingTextBox.Text = value.NoteText;
+                EditNoteTextBox.Text = value.NoteText;
 
                 // Выставление категории заметки
                 CategoryComboBox.SelectedIndex = (int)value.Category;
@@ -55,6 +55,7 @@ namespace NoteAppUI
             InitializeComponent();
 
             // Добавление элементов выпадающего списка категорий заметок
+            _note = new Note();
             CategoryComboBox.Items.Add("Documents");
             CategoryComboBox.Items.Add("Finance");
             CategoryComboBox.Items.Add("Health and sport");
@@ -62,6 +63,7 @@ namespace NoteAppUI
             CategoryComboBox.Items.Add("People");
             CategoryComboBox.Items.Add("Work");
             CategoryComboBox.Items.Add("Other");
+            CategoryComboBox.SelectedIndex = (int)_note.Category; 
         }
 
         /// <summary>
@@ -83,9 +85,9 @@ namespace NoteAppUI
         /// <summary>
         /// Изменение текста заметки
         /// </summary>
-        private void EditingTextBox_TextChanged(object sender, EventArgs e)
+        private void EditNoteTextBox_TextChanged(object sender, EventArgs e)
         {
-            _note.NoteText = EditingTextBox.Text;
+            _note.NoteText = EditNoteTextBox.Text;
         }
 
         /// <summary>

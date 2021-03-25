@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditForm));
             this.TitleLabel = new System.Windows.Forms.Label();
             this.TitleTextBox = new System.Windows.Forms.TextBox();
             this.CategoryLabel = new System.Windows.Forms.Label();
@@ -38,7 +39,7 @@
             this.ModifyingDataPicker = new System.Windows.Forms.DateTimePicker();
             this.OKButton = new System.Windows.Forms.Button();
             this.CancelButton = new System.Windows.Forms.Button();
-            this.EditingTextBox = new System.Windows.Forms.TextBox();
+            this.EditNoteTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // TitleLabel
@@ -114,7 +115,7 @@
             // 
             this.ModifyingDataPicker.Enabled = false;
             this.ModifyingDataPicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.ModifyingDataPicker.Location = new System.Drawing.Point(253, 72);
+            this.ModifyingDataPicker.Location = new System.Drawing.Point(253, 68);
             this.ModifyingDataPicker.Name = "ModifyingDataPicker";
             this.ModifyingDataPicker.Size = new System.Drawing.Size(94, 20);
             this.ModifyingDataPicker.TabIndex = 7;
@@ -141,27 +142,26 @@
             this.CancelButton.UseVisualStyleBackColor = true;
             this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
-            // EditingTextBox
+            // EditNoteTextBox
             // 
-            this.EditingTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.EditNoteTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.EditingTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.EditingTextBox.Location = new System.Drawing.Point(12, 98);
-            this.EditingTextBox.Multiline = true;
-            this.EditingTextBox.Name = "EditingTextBox";
-            this.EditingTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.EditingTextBox.Size = new System.Drawing.Size(554, 382);
-            this.EditingTextBox.TabIndex = 10;
-            this.EditingTextBox.WordWrap = false;
-            this.EditingTextBox.TextChanged += new System.EventHandler(this.EditingTextBox_TextChanged);
+            this.EditNoteTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.EditNoteTextBox.Location = new System.Drawing.Point(12, 94);
+            this.EditNoteTextBox.Multiline = true;
+            this.EditNoteTextBox.Name = "EditNoteTextBox";
+            this.EditNoteTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.EditNoteTextBox.Size = new System.Drawing.Size(554, 382);
+            this.EditNoteTextBox.TabIndex = 12;
+            this.EditNoteTextBox.TextChanged += new System.EventHandler(this.EditNoteTextBox_TextChanged);
             // 
             // EditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(578, 517);
-            this.Controls.Add(this.EditingTextBox);
+            this.Controls.Add(this.EditNoteTextBox);
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.OKButton);
             this.Controls.Add(this.ModifyingDataPicker);
@@ -172,6 +172,7 @@
             this.Controls.Add(this.CategoryLabel);
             this.Controls.Add(this.TitleTextBox);
             this.Controls.Add(this.TitleLabel);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(429, 320);
             this.Name = "EditForm";
             this.Text = "Add/Edit Note";
@@ -192,6 +193,6 @@
         private System.Windows.Forms.DateTimePicker ModifyingDataPicker;
         private System.Windows.Forms.Button OKButton;
         private System.Windows.Forms.Button CancelButton;
-        private System.Windows.Forms.TextBox EditingTextBox;
+        private System.Windows.Forms.TextBox EditNoteTextBox;
     }
 }

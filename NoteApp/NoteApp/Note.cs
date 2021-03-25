@@ -117,5 +117,33 @@ namespace NoteApp
                 _modifyingTime = value;
             }
         }
+
+        /// <summary>
+        /// Сравнение заметок
+        /// </summary>
+        public static bool operator ==(Note firstNote, Note secondNote)
+        {
+            if (firstNote.Name == secondNote.Name && firstNote.Category == secondNote.Category &&
+                firstNote.CreatingTime.Date == secondNote.CreatingTime.Date &&
+                firstNote.ModifyingTime.Date == secondNote.ModifyingTime.Date &&
+                firstNote.NoteText == secondNote.NoteText)
+                return true;
+            else
+                return false;
+        }
+
+        /// <summary>
+        /// Сравнение заметок
+        /// </summary>
+        public static bool operator !=(Note firstNote, Note secondNote)
+        {
+            if (firstNote.Name == secondNote.Name && firstNote.Category == secondNote.Category &&
+               firstNote.CreatingTime.Date == secondNote.CreatingTime.Date &&
+               firstNote.ModifyingTime.Date == secondNote.ModifyingTime.Date &&
+               firstNote.NoteText == secondNote.NoteText)
+                return false;
+            else
+                return true;
+        }
     }
 }

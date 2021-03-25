@@ -17,6 +17,7 @@ namespace NoteAppUI
         private Project _project = new Project();
         private string _path = "C:\\NoteApp.txt";
         private bool _pressedF1;
+        private bool _pressedDelete;
 
         public MainForm()
         {
@@ -24,6 +25,9 @@ namespace NoteAppUI
 
             // Чтение файла
             _project = ProjectManager.ReadFile(_path);
+
+            // Сортировка заметок по времени их изменения
+            _project.SortNotes();
 
             // Перед выделением заметки скрыть описывающие её элементы
             DisableNoteElements();
@@ -37,10 +41,7 @@ namespace NoteAppUI
             CategoryComboBox.Items.Add("Other");
             CategoryComboBox.Items.Add("People");
             CategoryComboBox.Items.Add("Work");
-
-            // Добавление сохранённых заметок в список заметок
-            for (int i = 0; i < _project.Notes.Count; i++)
-                NotesListBox.Items.Add(_project.Notes[i].Name);
+            CategoryComboBox.SelectedIndex = 0;
 
             // Выбор категории заметок
             CategoryComboBox.SelectedIndex = _project.CategoryIndex;
@@ -77,6 +78,7 @@ namespace NoteAppUI
             editNoteToolStripMenuItem.Enabled = false;
             RemoveNoteButton.Enabled = false;
             removeNoteToolStripMenuItem.Enabled = false;
+            _project.CurrentNoteIndex = -1;
         }
 
         /// <summary>
@@ -103,12 +105,15 @@ namespace NoteAppUI
                 return;
 
             // Передача созданной заметки главному окну
-            if (editForm.DialogResult == DialogResult.OK)
-                newNote.Name = editForm.Note.Name;
+            newNote.Name = editForm.Note.Name;
+            newNote.Category = editForm.Note.Category;
+            newNote.NoteText = editForm.Note.NoteText;
+            newNote.CreatingTime = DateTime.Now;
 
             // Добавление новой заметки в список всех заметок
-            NotesListBox.Items.Add(newNote.Name);
-            _project.Notes.Add(newNote);
+            NotesListBox.Items.Insert(0, newNote.Name);
+            _project.Notes.Insert(0, newNote);
+            NotesListBox.SetSelected(0, true);
         }
 
         /// <summary>
@@ -128,7 +133,10 @@ namespace NoteAppUI
             Note selectedNote = new Note();
 
             if (CategoryComboBox.SelectedIndex == 0)
+            {
                 selectedNote = _project.Notes[NotesListBox.SelectedIndex];
+                _project.CurrentNote = _project.Notes[NotesListBox.SelectedIndex];
+            }
             else
             {
                 int noteIndex = 0;
@@ -140,6 +148,7 @@ namespace NoteAppUI
                         if (noteIndex++ == NotesListBox.SelectedIndex)
                         {
                             selectedNote = _project.Notes[j];
+                            _project.CurrentNote = _project.Notes[j];
                             break;
                         }
                     }
@@ -218,6 +227,47 @@ namespace NoteAppUI
         }
 
         /// <summary>
+        /// Перевод string названия категории заметки в NoteCategory
+        /// </summary>
+        private NoteCategory StringToCategory(string category)
+        {
+            switch (category)
+            {
+                case "Documents":
+                    return NoteCategory.documents;
+                    break;
+
+                case "Finance":
+                    return NoteCategory.finance;
+                    break;
+
+                case "Health and sport":
+                    return NoteCategory.healthAndSport;
+                    break;
+
+                case "Home":
+                    return NoteCategory.home;
+                    break;
+
+                case "Other":
+                    return NoteCategory.other;
+                    break;
+
+                case "People":
+                    return NoteCategory.people;
+                    break;
+
+                case "Work":
+                    return NoteCategory.work;
+                    break;
+
+                default:
+                    return NoteCategory.other;
+                    break;
+            }
+        }
+
+        /// <summary>
         /// Редактирование заметки
         /// </summary>
         private void EditNoteButton_Click(object sender, EventArgs e)
@@ -227,7 +277,7 @@ namespace NoteAppUI
             // Вывод формы редактирования заметки
             EditForm editForm = new EditForm();
             Note selectedNote = new Note();
-            selectedNote = _project.Notes[selectedIndex];
+            selectedNote = _project.CurrentNote;
             editForm.Note = selectedNote;
             editForm.ShowDialog();
 
@@ -236,10 +286,29 @@ namespace NoteAppUI
                 return;
 
             // Обновление заметки в главном окне
-            _project.Notes[selectedIndex] = editForm.Note;
+            Note editedNote = new Note();
+            editedNote = editForm.Note;
             NotesListBox.Items.RemoveAt(selectedIndex);
-            NotesListBox.Items.Insert(selectedIndex, _project.Notes[selectedIndex].Name);
-            NotesListBox.SetSelected(selectedIndex, true);
+            NotesListBox.Items.Insert(0, editedNote.Name);
+
+            // Обновление заметок в списке всех заметок
+            _project.Notes.RemoveAt(_project.CurrentNoteIndex);
+            _project.Notes.Insert(0, editedNote);
+            NotesListBox.SetSelected(0, true);
+
+            // Обновление списка заметок выбранной категории
+            int savedIndex = CategoryComboBox.SelectedIndex;
+            CategoryComboBox.SelectedIndex = 0;
+            CategoryComboBox.SelectedIndex = savedIndex;
+
+            // Выделение выбранной заметки, если она не скрылась
+            if (NameLabel.Text != null && selectedNote.Category == editedNote.Category)
+                NotesListBox.SetSelected(0, true);
+            else
+            {
+                DisableNoteElements();
+                NotesListBox.SetSelected(0, false);
+            }
         }
 
         /// <summary>
@@ -257,8 +326,7 @@ namespace NoteAppUI
 
             // Удаление заметки
             var selectedIndex = NotesListBox.SelectedIndex;
-
-            _project.Notes.RemoveAt(selectedIndex);
+            _project.Notes.RemoveAt(_project.CurrentNoteIndex);
             NotesListBox.Items.Clear();
 
             // Обновление списка заметок
@@ -274,6 +342,17 @@ namespace NoteAppUI
         /// </summary>
         private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // Запоминание выбранной заметки
+            Note currentNote = new Note();
+            currentNote.Name = _project.CurrentNote.Name;
+            currentNote.Category = _project.CurrentNote.Category;
+            currentNote.NoteText = _project.CurrentNote.NoteText;
+            currentNote.CreatingTime = _project.CurrentNote.CreatingTime;
+            currentNote.ModifyingTime = _project.CurrentNote.ModifyingTime;
+
+            if (currentNote.NoteText == null)
+                currentNote.NoteText = "";
+
             // Показать все заметки
             if (CategoryComboBox.SelectedIndex == 0)
             {
@@ -281,6 +360,9 @@ namespace NoteAppUI
 
                 for (int k = 0; k < _project.Notes.Count; k++)
                     NotesListBox.Items.Add(_project.Notes[k].Name);
+
+                if (_project.CurrentNoteIndex >= 0 && _project.CurrentNoteIndex < _project.Notes.Count)
+                    NotesListBox.SetSelected(_project.CurrentNoteIndex, true);
 
                 return;
             }
@@ -305,12 +387,28 @@ namespace NoteAppUI
             NotesListBox.Items.Clear();
 
             for (int a = 0; a < _project.Notes.Count; a++)
-            {
                 if (CategoryToString(_project.Notes[a].Category) == (string)CategoryComboBox.SelectedItem)
-                {
                     NotesListBox.Items.Add(_project.Notes[a].Name);
-                }
+
+            // Выделение выбранной заметки
+            for (int b = 0; b < NotesListBox.Items.Count; b++)
+            {
+                Note selectedNote = new Note();
+                NotesListBox.SetSelected(b, true);
+                selectedNote.Name = NameLabel.Text;
+                selectedNote.Category = StringToCategory(NoteCategoryLabel.Text);
+                selectedNote.NoteText = NoteTextBox.Text;
+                selectedNote.CreatingTime = CreatingDateTimePicker.Value;
+                selectedNote.ModifyingTime = ModifyingDateTimePicker.Value;
+
+                if (currentNote == selectedNote)
+                    return;
+                else
+                    NotesListBox.SetSelected(b, false);
             }
+
+            // Скрыть элементы, описывающие уже скрытую из списка заметку
+            DisableNoteElements();
         }
 
         /// <summary>
@@ -323,24 +421,55 @@ namespace NoteAppUI
         }
 
         /// <summary>
-        /// Вывод формы о программе при нажатии клавиши F1
+        /// Нажатие горячих клавиш
         /// </summary>
-        private void F1_KeyDown(object sender, KeyEventArgs e)
+        private void Shortcut_KeyDown(object sender, KeyEventArgs e)
         {
+            // Вывод окна о программе при нажатии F1
             if (e.KeyCode == Keys.F1 && !_pressedF1)
             {
                 _pressedF1 = true;
                 AboutForm aboutForm = new AboutForm();
                 aboutForm.ShowDialog();
             }
+
+            // Удаление заметки при нажатии Delete
+            if (e.KeyCode == Keys.Delete && !_pressedDelete && RemoveNoteButton.Enabled)
+            {
+                // Вывод предупреждения
+                DialogResult deletingResult = MessageBox.Show("Do you really want to delete this note?", "Deleting a note",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                // Отмена удаления заметки
+                if (deletingResult == DialogResult.No)
+                    return;
+
+                // Удаление заметки
+                var selectedIndex = NotesListBox.SelectedIndex;
+                _project.Notes.RemoveAt(_project.CurrentNoteIndex);
+                NotesListBox.Items.Clear();
+
+                // Обновление списка заметок
+                for (int k = 0; k < _project.Notes.Count; k++)
+                    NotesListBox.Items.Add(_project.Notes[k].Name);
+
+                // Обновление списка заметок выбранной категории
+                int savedIndex = CategoryComboBox.SelectedIndex;
+                CategoryComboBox.SelectedIndex = 0;
+                CategoryComboBox.SelectedIndex = savedIndex;
+
+                // Скрыть элементы, описывающие заметку
+                DisableNoteElements();
+            }
         }
 
         /// <summary>
-        /// Прекращение нажатия клавиши F1
+        /// Прекращение нажатия клавиш
         /// </summary>
-        private void F1_KeyUp(object sender, KeyEventArgs e)
+        private void Shorcut_KeyUp(object sender, KeyEventArgs e)
         {
             _pressedF1 = false;
+            _pressedDelete = false;
         }
 
         /// <summary>
